@@ -512,35 +512,56 @@ body {
 /* ─── MOBILE  (≤ 480px) ──────────────────────── */
 @media (max-width: 480px) {
   body { padding-top: 50px; }
+
   .navbar { padding: 8px 12px; height: 50px; }
-  .logo { height: 28px; }
-  .navbar input { width: 120px; padding: 6px 10px; font-size: 0.8rem; }
-  .search-btn { padding: 6px 9px; }
-  .hero { height: 56vw; min-height: 160px; }
-  .hero-content { bottom: 8px; left: 10px; right: 10px; max-width: 100%; }
-  .hero-content h2 { font-size: 0.95rem; margin-bottom: 3px; }
+
+  .logo { font-size: 1.1rem; }
+
+  .navbar input {
+    width: 100%;
+    max-width: 160px;
+    padding: 7px 10px;
+    font-size: 0.82rem;
+  }
+
+  .search-btn { padding: 7px 10px; }
+
+  .hero { height: 52vw; min-height: 160px; }
+
+  .hero-content { bottom: 10px; left: 12px; right: 12px; max-width: 100%; }
+
+  .hero-content h2 { font-size: 1rem; margin-bottom: 4px; }
+
   .hero-content p { display: none; }
-  #heroBtn .btn-text { display: none; }
-  #heroBtn .btn-icon { display: inline; }
-  #heroBtn { padding: 6px 10px; font-size: 1rem; }
+
+  /* hero download button — keep normal on mobile */
+  #heroBtn { padding: 9px 20px; font-size: 0.82rem; }
+
   #volumeWrap { display: none !important; }
-  .row { padding: 8px 8px 4px; }
+
+  .row { padding: 10px 10px 4px; }
   .row-header { margin-bottom: 8px; padding: 0 4px; }
-  .row-header h2 { font-size: 0.88rem; }
-  .see-all { font-size: 0.75rem; }
+  .row-header h2 { font-size: 0.9rem; }
+  .see-all { font-size: 0.78rem; }
+
   .movie-card { width: 110px; height: 165px; flex: 0 0 110px; border-radius: 6px; }
   .movie-card img, .overlay { border-radius: 6px; }
-  .movie-row { padding: 10px 8px; gap: 7px; }
+  .movie-row { padding: 10px 8px; gap: 8px; }
   .row-wrapper { padding-top: 8px; padding-bottom: 8px; margin-bottom: -8px; }
-  .overlay h4 { font-size: 0.65rem; }
-  .overlay button { padding: 4px 0; font-size: 0.65rem; }
-  #volumeSlider { width: 60px; }
+
+  .overlay { padding: 6px; }
+  .overlay h4 { font-size: 0.7rem; }
+  .overlay button { padding: 8px 0; font-size: 0.72rem; min-height: 32px; }
+
+  /* hide float card on mobile — no hover */
+  .float-card { display: none !important; }
 }
 
 /* ─── SMALL PHONE  (≤ 360px) ─────────────────── */
 @media (max-width: 360px) {
-  .navbar input { width: 95px; }
+  .navbar input { max-width: 120px; }
   .movie-card { width: 95px; height: 143px; flex: 0 0 95px; }
   .hero { height: 54vw; min-height: 140px; }
   .movie-row { gap: 6px; padding: 8px 6px; }
+  .row-header h2 { font-size: 0.82rem; }
 }

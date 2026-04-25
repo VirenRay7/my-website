@@ -278,12 +278,15 @@ categories.forEach(cat => {
 });
 
 // ─── SEARCH ───────────────────────────────────────
+const searchEl = document.getElementById("search");
+searchEl.value = ""; // clear on home page load
+
 function doSearch() {
-  const val = document.getElementById("search").value.trim();
+  const val = searchEl.value.trim();
   if (val) window.location.href = `search.html?q=${encodeURIComponent(val)}`;
 }
 
-document.getElementById("search").addEventListener("keydown", e => {
+searchEl.addEventListener("keydown", e => {
   if (e.key === "Enter") doSearch();
 });
 
