@@ -287,9 +287,11 @@ body {
   }
 
   .hero {
-    height: 52vh;
-    min-height: 240px;
+    height: 70vh;
+    min-height: 320px;
     padding: 16px;
+    /* portrait bg: show top of image (faces/titles) */
+    background-position: top center;
   }
 
   .row {
