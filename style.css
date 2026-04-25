@@ -1,0 +1,598 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #0b0b0b;
+  color: white;
+  overflow-x: hidden;
+  padding-top: 56px; /* navbar height */
+}
+
+/* ─── NAVBAR ─────────────────────────────────── */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+}
+
+.logo {
+  color: #e50914;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar input {
+  padding: 8px 16px;
+  border-radius: 20px 0 0 20px;
+  border: none;
+  width: clamp(130px, 35vw, 260px);
+  font-size: 0.88rem;
+  outline: none;
+  background: #1e1e1e;
+  color: white;
+}
+
+.navbar input::placeholder {
+  color: #888;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.search-btn {
+  padding: 8px 12px;
+  background: #e50914;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background: #c40812;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 70vh;
+  min-height: 300px;
+  overflow: hidden;
+  background: #000;
+  z-index: 1;
+}
+
+#heroTrailerWrap,
+#heroPoster {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: none;
+  z-index: 0;
+  display: none;
+  pointer-events: none;
+}
+
+#heroTrailerWrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #0b0b0b 8%, rgba(0,0,0,0.25) 60%, transparent);
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: clamp(14px, 3vw, 36px);
+  left: clamp(14px, 3vw, 36px);
+  z-index: 2;
+  max-width: 500px;
+}
+
+.hero-content h2 {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+  color: #bbb;
+  margin-bottom: 12px;
+}
+
+
+
+.hero-btn {
+  padding: 7px 16px;
+  background: #e50914;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.hero-btn:hover {
+  background: #c40812;
+}
+
+#categoriesContainer {
+  background: #0b0b0b;
+}
+.row {
+  padding: 16px 20px 10px;
+  /* NO z-index here — prevents stacking context trapping cards */
+}
+
+.row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.row-header h2 {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  /* NO z-index — cards must be able to float above this */
+}
+
+.see-all {
+  color: #e50914;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.see-all:hover {
+  color: #ff4d4d;
+}
+
+/* ─── ROW WRAPPER ────────────────────────────── */
+.row-wrapper {
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: -20px;
+  overflow: visible;
+}
+
+/* ─── SCROLLABLE STRIP ───────────────────────── */
+.movie-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 20px 48px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.movie-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── CARD ───────────────────────────────────── */
+/*
+  Landscape 16:9 cards — Netflix style
+*/
+.movie-card {
+  width: 240px;
+  height: 135px;            /* 240 * 9/16 */
+  flex: 0 0 240px;
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+  z-index: 1;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* ─── HOVER (mouse devices only) ─────────────── */
+@media (hover: hover) {
+  .movie-card:hover {
+    transform: scale(1.22) translateY(-8px);
+    z-index: 999;
+    transition: transform 0.35s ease, z-index 0s 0s;
+  }
+
+  .movie-card:hover .overlay {
+    opacity: 1;
+  }
+}
+
+/* ─── OVERLAY ────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 40%, transparent);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* touch devices: always show overlay */
+@media (hover: none) {
+  .overlay {
+    opacity: 1;
+  }
+}
+
+.overlay h4 {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+
+.overlay button {
+  width: 100%;
+  padding: 7px 0;
+  background: #e50914;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.overlay button:hover {
+  background: #c40812;
+}
+
+/* ─── SCROLL ARROWS ──────────────────────────── */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  transition: background 0.2s;
+}
+
+.scroll-btn:hover {
+  background: rgba(229, 9, 20, 0.85);
+}
+
+.left  { left:  4px; }
+.right { right: 4px; }
+
+/* ─── TABLET  (≤ 768px) ──────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    height: 50vw;
+    min-height: 180px;
+  }
+
+  .movie-card {
+    width: 180px;
+    height: 101px;
+    flex: 0 0 180px;
+  }
+
+  .scroll-btn { display: none; }
+
+  .movie-row {
+    padding: 16px 16px;
+    gap: 10px;
+  }
+
+  .row { padding: 12px 12px 6px; }
+
+  .row-wrapper {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+  }
+}
+
+/* ─── MOBILE  (≤ 480px) ──────────────────────── */
+@media (max-width: 480px) {
+  body { padding-top: 50px; }
+
+  .navbar {
+    padding: 8px 12px;
+    height: 50px;
+  }
+
+  .logo { font-size: 1rem; }
+
+  .navbar input {
+    width: 120px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .search-btn { padding: 6px 9px; }
+
+  .hero {
+    height: 56vw;
+    min-height: 160px;
+  }
+
+  .hero-content {
+    bottom: 8px;
+    left: 10px;
+    right: 10px;
+    max-width: 100%;
+  }
+
+  .hero-content h2 {
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+  }
+
+  .hero-content p {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+    /* hide desc on very small to save space */
+    display: none;
+  }
+
+  .hero-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  /* hide volume on mobile — trailer doesn't autoplay on touch */
+  #volumeWrap { display: none !important; }
+
+  .row { padding: 8px 8px 4px; }
+
+  .row-header {
+    margin-bottom: 8px;
+    padding: 0 4px;
+  }
+
+  .row-header h2 { font-size: 0.88rem; }
+  .see-all { font-size: 0.75rem; }
+
+  .movie-card {
+    width: 130px;
+    height: 73px;
+    flex: 0 0 130px;
+    border-radius: 4px;
+  }
+
+  .movie-row {
+    padding: 10px 8px;
+    gap: 7px;
+  }
+
+  .row-wrapper {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: -8px;
+  }
+
+  .overlay h4 { font-size: 0.65rem; }
+  .overlay button {
+    padding: 4px 0;
+    font-size: 0.65rem;
+  }
+}
+
+/* ─── SMALL PHONE  (≤ 360px) ─────────────────── */
+@media (max-width: 360px) {
+  .navbar input { width: 95px; }
+
+  .movie-card {
+    width: 110px;
+    height: 62px;
+    flex: 0 0 110px;
+  }
+
+  .hero {
+    height: 54vw;
+    min-height: 140px;
+  }
+
+  .movie-row {
+    gap: 6px;
+    padding: 8px 6px;
+  }
+}
+
+
+
+/* ─── FLOAT CARD (hover preview) ────────────────── */
+.float-card {
+  position: fixed;
+  z-index: 5000;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #181818;
+  box-shadow: 0 16px 56px rgba(0,0,0,0.95);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: all;
+}
+
+.float-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.float-video iframe,
+.float-video img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+}
+
+.float-info {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: slideUp 0.25s ease 0.1s both;
+}
+
+.float-info h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.float-info p {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.float-info button {
+  padding: 7px 0;
+  background: white;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.float-info button:hover { background: #ddd; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (hover: none) {
+  .float-card { display: none !important; }
+}
+
+/* ─── VOLUME CONTROL ─────────────────────────── */
+#volumeWrap {
+  position: absolute;
+  bottom: clamp(14px, 3vw, 36px);
+  right: clamp(14px, 3vw, 36px);
+  z-index: 3;
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+#muteBtn {
+  background: rgba(0,0,0,0.55);
+  border: 2px solid rgba(255,255,255,0.6);
+  color: white;
+  font-size: 1rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+#muteBtn:hover {
+  background: rgba(0,0,0,0.85);
+  border-color: white;
+}
+
+#volumeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 90px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.3);
+  outline: none;
+  cursor: pointer;
+  transition: width 0.2s;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+#volumeSlider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  #volumeSlider { width: 60px; }
+}

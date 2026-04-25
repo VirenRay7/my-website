@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trending Now — VDownload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .trending-page {
+      padding: 80px 20px 40px;
+      min-height: 100vh;
+    }
+
+    .trending-page .page-title {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 24px;
+      padding-left: 4px;
+    }
+
+    .trending-page .page-title span {
+      color: #e50914;
+    }
+
+    .trending-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 18px;
+    }
+
+    .trending-grid .movie-card {
+      width: 100%;
+      flex: unset;
+      height: 225px;
+    }
+
+    @media (max-width: 600px) {
+      .trending-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .trending-grid .movie-card {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .trending-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+      }
+
+      .trending-grid .movie-card {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="index.html" class="logo" style="text-decoration:none;">VDownload</a>
+  <input type="text" id="search" placeholder="Search movies..." autocomplete="off">
+</header>
+
+<div class="trending-page">
+  <h2 class="page-title">Trending <span>Now</span></h2>
+  <div class="trending-grid" id="trendingGrid"></div>
+</div>
+
+<script src="movies.js"></script>
+<script>
+  const grid = document.getElementById("trendingGrid");
+
+  movies.forEach(movie => {
+    const card = document.createElement("div");
+    card.classList.add("movie-card");
+    card.innerHTML = `
+      <img src="${movie.img}" alt="${movie.title}">
+      <div class="overlay">
+        <h4>${movie.title}</h4>
+        <button onclick="event.stopPropagation(); window.open('${movie.download}', '_blank')">
+          ⬇ Download
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // search redirects to search page
+  document.getElementById("search").addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      const val = e.target.value.trim();
+      if (val) window.location.href = `search.html?q=${encodeURIComponent(val)}`;
+    }
+  });
+</script>
+</body>
+</html>

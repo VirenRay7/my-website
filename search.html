@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search — VDownload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .search-page {
+      padding: 90px 24px 40px;
+      min-height: 100vh;
+    }
+
+    .search-page h2 {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: #aaa;
+      margin-bottom: 24px;
+    }
+
+    .search-page h2 span { color: white; }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .search-grid .movie-card {
+      width: 100%;
+      flex: unset;
+      aspect-ratio: 16/9;
+      height: auto;
+    }
+
+    .no-results {
+      color: #666;
+      font-size: 1rem;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .no-results span { color: #e50914; }
+
+    @media (max-width: 480px) {
+      .search-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .search-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="index.html" class="logo" style="text-decoration:none;">VDownload</a>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search movies..." autocomplete="off">
+    <button class="search-btn" onclick="doSearch()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="search-page">
+  <h2 id="searchHeading" style="display:none;">
+    Results for "<span id="queryLabel"></span>"
+  </h2>
+  <div class="search-grid" id="searchGrid"></div>
+  <p class="no-results" id="noResults" style="display:none;">
+    No results for "<span id="noResultsQuery"></span>"<br>
+    <small style="color:#555;">Try a different title or genre</small>
+  </p>
+</div>
+
+<script src="movies.js"></script>
+<script>
+  const searchInput = document.getElementById("search");
+  const grid        = document.getElementById("searchGrid");
+  const noResults   = document.getElementById("noResults");
+  const heading     = document.getElementById("searchHeading");
+
+  // read query from URL
+  let query = new URLSearchParams(window.location.search).get("q") || "";
+  searchInput.value = query;
+
+  function makeCard(movie) {
+    const card = document.createElement("div");
+    card.classList.add("movie-card");
+    card.innerHTML = `
+      <img src="${movie.bg || movie.img}" alt="${movie.title}">
+      <div class="overlay">
+        <h4>${movie.title}</h4>
+        <button onclick="event.stopPropagation(); window.open('${movie.download}', '_blank')">
+          ⬇ Download
+        </button>
+      </div>
+    `;
+    return card;
+  }
+
+  function dedupe(list) {
+    const seen = new Set();
+    return list.filter(m => {
+      const key = m.title.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function scoreMovie(movie, val) {
+    const t = movie.title.toLowerCase();
+    const d = movie.desc.toLowerCase();
+    if (t === val)         return 5;
+    if (t.startsWith(val)) return 4;
+    if (t.includes(val))   return 3;
+    if (d.startsWith(val)) return 2;
+    if (d.includes(val))   return 1;
+    return 0;
+  }
+
+  function runSearch(val) {
+    grid.innerHTML = "";
+    noResults.style.display = "none";
+
+    if (!val) {
+      heading.style.display = "none";
+      // show all movies (deduped) when empty
+      dedupe(movies).forEach(m => grid.appendChild(makeCard(m)));
+      return;
+    }
+
+    heading.style.display = "block";
+    document.getElementById("queryLabel").textContent = val;
+    document.getElementById("noResultsQuery").textContent = val;
+
+    const results = dedupe(
+      movies
+        .map(m => ({ movie: m, score: scoreMovie(m, val.toLowerCase()) }))
+        .filter(x => x.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(x => x.movie)
+    );
+
+    if (!results.length) {
+      noResults.style.display = "block";
+      return;
+    }
+
+    results.forEach(m => grid.appendChild(makeCard(m)));
+  }
+
+  // initial render
+  runSearch(query);
+
+  // keep focus with cursor at end
+  searchInput.focus();
+  searchInput.setSelectionRange(query.length, query.length);
+
+  function doSearch() {
+    const val = searchInput.value.trim();
+    if (!val) { window.location.href = "index.html"; return; }
+    query = val;
+    history.replaceState(null, "", `search.html?q=${encodeURIComponent(query)}`);
+    runSearch(query);
+  }
+
+  searchInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") doSearch();
+  });
+
+  // live filter — no page reloads, no redirects
+  searchInput.addEventListener("input", e => {
+    query = e.target.value.trim();
+    if (!query) {
+      window.location.href = "index.html";
+      return;
+    }
+    const url = `search.html?q=${encodeURIComponent(query)}`;
+    history.replaceState(null, "", url);
+    runSearch(query);
+  });
+</script>
+</body>
+</html>
