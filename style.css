@@ -161,9 +161,9 @@ body {
   align-self: flex-start;
 }
 
-.hero-btn:hover { background: #c40812; }
-
-.btn-icon { display: none; }
+.hero-btn:hover {
+  background: #c40812;
+}
 
 #categoriesContainer {
   background: #0b0b0b;
@@ -405,25 +405,10 @@ body {
     display: none;
   }
 
-  /* hero download — icon only, bottom-right */
-  #heroBtn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    left: auto;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4;
+  .hero-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
   }
-
-  #heroBtn .btn-text { display: none; }
-  #heroBtn .btn-icon { display: inline; }
 
   /* hide volume on mobile — trailer doesn't autoplay on touch */
   #volumeWrap { display: none !important; }
