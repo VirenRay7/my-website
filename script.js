@@ -113,23 +113,50 @@ const firstTrending = movies.find(m => m.category === "trending");
 if (firstTrending) loadHero(firstTrending);
 
 // ─── FLOATING EXPANDED CARD ───────────────────────
-let floatCard  = null;
-let floatTimer = null;
-let hideTimer  = null;
+let floatCard    = null;
+let floatTimer   = null;
+let hideTimer    = null;
+let floatAnchor  = null;
+let scrollRafId  = null;
 
 function removeFloat() {
   if (floatCard) {
     floatCard.style.opacity   = "0";
     floatCard.style.transform = "scale(0.95)";
-    setTimeout(() => { floatCard && floatCard.remove(); floatCard = null; }, 180);
+    setTimeout(() => { floatCard && floatCard.remove(); floatCard = null; floatAnchor = null; }, 180);
   }
 }
+
+function positionFloat() {
+  if (!floatCard || !floatAnchor) return;
+  const rect   = floatAnchor.getBoundingClientRect();
+  const W      = 360;
+  const fcH    = floatCard.offsetHeight || 280;
+  const margin = 8;
+
+  let left = rect.left + rect.width / 2 - W / 2;
+  left = Math.max(margin, Math.min(left, window.innerWidth - W - margin));
+
+  let top = rect.top - fcH / 2 + rect.height / 2;
+  top = Math.max(60 + margin, Math.min(top, window.innerHeight - fcH - margin));
+
+  floatCard.style.left = left + "px";
+  floatCard.style.top  = top  + "px";
+}
+
+function onScrollFloat() {
+  if (!floatCard) return;
+  cancelAnimationFrame(scrollRafId);
+  scrollRafId = requestAnimationFrame(positionFloat);
+}
+
+window.addEventListener("scroll", onScrollFloat, { passive: true });
 
 function showFloat(movie, anchor) {
   clearTimeout(hideTimer);
   if (floatCard) { floatCard.remove(); floatCard = null; }
 
-  const rect   = anchor.getBoundingClientRect();
+  floatAnchor = anchor;
   const W      = 360;
   const baseUrl = movie.trailer ? movie.trailer.split("?")[0] : "";
   const src     = baseUrl
@@ -152,29 +179,17 @@ function showFloat(movie, anchor) {
     </div>
   `;
 
+  fc.style.width = W + "px";
   document.body.appendChild(fc);
   floatCard = fc;
 
-  // position: centered over anchor, prefer above
-  const margin = 8;
-  let left = rect.left + rect.width / 2 - W / 2;
-  left = Math.max(margin, Math.min(left, window.innerWidth - W - margin));
+  positionFloat();
 
-  const fcH = 280; // approx height
-  let top = rect.top - fcH / 2 + rect.height / 2; // vertically centered on card
-  top = Math.max(60 + margin, Math.min(top, window.innerHeight - fcH - margin));
-
-  fc.style.left  = left + "px";
-  fc.style.top   = top  + "px";
-  fc.style.width = W    + "px";
-
-  // animate in
   requestAnimationFrame(() => {
     fc.style.opacity   = "1";
     fc.style.transform = "scale(1)";
   });
 
-  // load trailer after popup is visible (1s delay)
   if (src) {
     setTimeout(() => {
       const iframe = fc.querySelector("#float-iframe");

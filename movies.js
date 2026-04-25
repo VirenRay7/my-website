@@ -24,7 +24,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "comedy",
     img: "https://images.plex.tv/photo?size=large-1920&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fdba671f9ddca9c389fe844253097f920.jpg",
-    bg: "https://www.bollywoodhungama.com/wp-content/uploads/2023/09/Vicky-Vidya-Ka-Woh-Wala-Video.jpg",
+    bg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-N4ceQ4Dv9omUERicyoRNIYpZhb4EW8nW_Q&s",
     mobileBg: "https://m.media-amazon.com/images/M/MV5BNDViYjk4ZmYtNjhhYS00OGQ0LWFlNTktZTYwMzcyZDUwODcwXkEyXkFqcGc@._V1_.jpg",
     trailer: "https://www.youtube.com/embed/4liP09haI9g?si=KAkX_zq02d9ZSV9H?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1GDaTKAfF7VFvimAv4hjKl3QuIskzTu0i&confirm=t"
@@ -34,7 +34,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "drama",
     img: "https://images.plex.tv/photo?size=large-1920&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fdba671f9ddca9c389fe844253097f920.jpg",
-    bg: "https://www.bollywoodhungama.com/wp-content/uploads/2023/09/Vicky-Vidya-Ka-Woh-Wala-Video.jpg",
+    bg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-N4ceQ4Dv9omUERicyoRNIYpZhb4EW8nW_Q&s",
     mobileBg: "https://m.media-amazon.com/images/M/MV5BNDViYjk4ZmYtNjhhYS00OGQ0LWFlNTktZTYwMzcyZDUwODcwXkEyXkFqcGc@._V1_.jpg",
     trailer: "https://www.youtube.com/embed/4liP09haI9g?si=KAkX_zq02d9ZSV9H?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1GDaTKAfF7VFvimAv4hjKl3QuIskzTu0i&confirm=t"
@@ -44,7 +44,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "drama",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
-    bg: "https://images.news18.com/webstories/uploads/2025/02/WhatsApp-Image-2025-02-04-at-11.14.35-AM-2025-02-cd0024caeab78dd55ae097a1a8c26bdf.jpeg",
+    bg: "https://lehren.com/wp-content/uploads/2026/04/TOASTER-Movie-Review.jpg",
     mobileBg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
     trailer: "https://www.youtube.com/embed/h1Q_Oykycns?si=66n-l_RnzrRHsce7?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1J8JFg6GKy7C6UOUckuX1zjf8fAJ8aBUx&confirm=t"
@@ -54,7 +54,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "trending",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
-    bg: "https://images.news18.com/webstories/uploads/2025/02/WhatsApp-Image-2025-02-04-at-11.14.35-AM-2025-02-cd0024caeab78dd55ae097a1a8c26bdf.jpeg",
+    bg: "https://lehren.com/wp-content/uploads/2026/04/TOASTER-Movie-Review.jpg",
     mobileBg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
     trailer: "https://www.youtube.com/embed/h1Q_Oykycns?si=66n-l_RnzrRHsce7?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1J8JFg6GKy7C6UOUckuX1zjf8fAJ8aBUx&confirm=t"
@@ -64,7 +64,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "comedy",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
-    bg: "https://images.news18.com/webstories/uploads/2025/02/WhatsApp-Image-2025-02-04-at-11.14.35-AM-2025-02-cd0024caeab78dd55ae097a1a8c26bdf.jpeg",
+    bg: "https://lehren.com/wp-content/uploads/2026/04/TOASTER-Movie-Review.jpg",
     mobileBg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr7XeD-CoXGXKmRY9B2Bu3QFfkafgMf3ckTA&s",
     trailer: "https://www.youtube.com/embed/h1Q_Oykycns?si=66n-l_RnzrRHsce7?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1J8JFg6GKy7C6UOUckuX1zjf8fAJ8aBUx&confirm=t"
@@ -94,7 +94,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "comedy",
     img: "https://resizing.flixster.com/Di4fMeRB5zhrinRwscOj02oiXBc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZDMwMzM1LTVlN2EtNGJhZC05MGExLTk1NWQwNzI5YjdjNy5qcGc=",
-    bg: "https://m.media-amazon.com/images/M/MV5BYjhiZjE5YTEtZjFlNi00ZjIyLThmYTgtNzYyMTUzODA3ODk1XkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_.jpg",
+    bg: "https://images.jansatta.com/2022/01/bhumi-pednekar.jpg",
     mobileBg: "https://resizing.flixster.com/Di4fMeRB5zhrinRwscOj02oiXBc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZDMwMzM1LTVlN2EtNGJhZC05MGExLTk1NWQwNzI5YjdjNy5qcGc=",
     trailer: "https://www.youtube.com/embed/hjxoPh4DM_A?si=UUYW0_n-gkVX_WcC?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1RS3digAMWsQy4feLTMVJUFstcbWFNhGy&confirm=t"
@@ -104,7 +104,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "drama",
     img: "https://resizing.flixster.com/Di4fMeRB5zhrinRwscOj02oiXBc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZDMwMzM1LTVlN2EtNGJhZC05MGExLTk1NWQwNzI5YjdjNy5qcGc=",
-    bg: "https://m.media-amazon.com/images/M/MV5BYjhiZjE5YTEtZjFlNi00ZjIyLThmYTgtNzYyMTUzODA3ODk1XkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_.jpg",
+    bg: "https://images.jansatta.com/2022/01/bhumi-pednekar.jpg",
     mobileBg: "https://resizing.flixster.com/Di4fMeRB5zhrinRwscOj02oiXBc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZDMwMzM1LTVlN2EtNGJhZC05MGExLTk1NWQwNzI5YjdjNy5qcGc=",
     trailer: "https://www.youtube.com/embed/hjxoPh4DM_A?si=UUYW0_n-gkVX_WcC?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1RS3digAMWsQy4feLTMVJUFstcbWFNhGy&confirm=t"
@@ -114,7 +114,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "comedy",
     img: "https://m.media-amazon.com/images/M/MV5BZTM5YTA2NWItNzc5Mi00YmY1LWFhNTQtYmNmZTMxNTg0NzA1XkEyXkFqcGc@._V1_.jpg",
-    bg: "https://m.media-amazon.com/images/S/pv-target-images/79c196e41584b84b32e5e63e9f26ad0af46d160ad0192c67367c7dfc7a288043.jpg",
+    bg: "https://i.ytimg.com/vi/8E_IeWynvnc/maxresdefault.jpg",
     mobileBg: "https://m.media-amazon.com/images/M/MV5BZTM5YTA2NWItNzc5Mi00YmY1LWFhNTQtYmNmZTMxNTg0NzA1XkEyXkFqcGc@._V1_.jpg",
     trailer: "https://www.youtube.com/embed/8E_IeWynvnc?si=UTmexD-jC55mdN6n?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1lqYkIgy_NKYXvoqS7ZR0UmeUH0tZS8eN&confirm=t"
@@ -124,7 +124,7 @@ const movies = [
     desc: "Comedy, drama",
     category: "drama",
     img: "https://m.media-amazon.com/images/M/MV5BZTM5YTA2NWItNzc5Mi00YmY1LWFhNTQtYmNmZTMxNTg0NzA1XkEyXkFqcGc@._V1_.jpg",
-    bg: "https://m.media-amazon.com/images/S/pv-target-images/79c196e41584b84b32e5e63e9f26ad0af46d160ad0192c67367c7dfc7a288043.jpg",
+    bg: "https://i.ytimg.com/vi/8E_IeWynvnc/maxresdefault.jpg",
     mobileBg: "https://m.media-amazon.com/images/M/MV5BZTM5YTA2NWItNzc5Mi00YmY1LWFhNTQtYmNmZTMxNTg0NzA1XkEyXkFqcGc@._V1_.jpg",
     trailer: "https://www.youtube.com/embed/8E_IeWynvnc?si=UTmexD-jC55mdN6n?autoplay=1&mute=1",
     download: "https://drive.google.com/uc?export=download&id=1lqYkIgy_NKYXvoqS7ZR0UmeUH0tZS8eN&confirm=t"
