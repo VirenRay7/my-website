@@ -101,6 +101,7 @@ body {
   height: 100%;
   border: none;
   pointer-events: none;
+  transform: scale(1.08);
   /* hide YouTube controls bar */
   margin-bottom: -50px;
 }
@@ -424,11 +425,17 @@ body {
   .see-all { font-size: 0.75rem; }
 
   .movie-card {
-    width: 130px;
-    height: 73px;
-    flex: 0 0 130px;
-    border-radius: 4px;
+    width: 110px;
+    height: 165px;  /* portrait 2:3 ratio */
+    flex: 0 0 110px;
+    border-radius: 6px;
   }
+
+  .movie-card img {
+    border-radius: 6px;
+  }
+
+  /* use portrait poster image on mobile */
 
   .movie-row {
     padding: 10px 8px;
@@ -453,9 +460,9 @@ body {
   .navbar input { width: 95px; }
 
   .movie-card {
-    width: 110px;
-    height: 62px;
-    flex: 0 0 110px;
+    width: 95px;
+    height: 143px;
+    flex: 0 0 95px;
   }
 
   .hero {

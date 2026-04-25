@@ -94,8 +94,10 @@
     list.forEach(movie => {
       const card = document.createElement("div");
       card.classList.add("movie-card");
+      const isMob = window.innerWidth <= 480;
+      const src   = isMob ? (movie.img || movie.bg) : (movie.bg || movie.img);
       card.innerHTML = `
-        <img src="${movie.bg || movie.img}" alt="${movie.title}">
+        <img src="${src}" alt="${movie.title}">
         <div class="overlay">
           <h4>${movie.title}</h4>
           <button onclick="event.stopPropagation(); window.open('${movie.download}', '_blank')">

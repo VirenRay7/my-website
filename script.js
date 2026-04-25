@@ -203,12 +203,28 @@ function showFloat(movie, anchor) {
   });
 }
 
+// ─── CARD IMAGE HELPER ────────────────────────────
+const isMobileView = () => window.innerWidth <= 480;
+function cardImg(movie) {
+  return isMobileView() ? (movie.img || movie.bg) : (movie.bg || movie.img);
+}
+
+// swap all card images on resize
+window.addEventListener("resize", () => {
+  document.querySelectorAll(".movie-card img[data-movie-id]").forEach(img => {
+    const id  = img.dataset.movieId;
+    const mov = movies.find(m => m.title === id);
+    if (mov) img.src = cardImg(mov);
+  });
+});
+
 // ─── BUILD CARD ───────────────────────────────────
 function createCard(movie) {
   const card = document.createElement("div");
   card.classList.add("movie-card");
+
   card.innerHTML = `
-    <img src="${movie.bg || movie.img}" alt="${movie.title}">
+    <img src="${cardImg(movie)}" data-movie-id="${movie.title}" alt="${movie.title}">
     <div class="overlay">
       <h4>${movie.title}</h4>
       <button onclick="event.stopPropagation(); window.open('${movie.download}', '_blank')">
@@ -218,10 +234,12 @@ function createCard(movie) {
   `;
 
   card.addEventListener("mouseenter", () => {
+    if (!window.matchMedia("(hover: hover)").matches) return;
     floatTimer = setTimeout(() => showFloat(movie, card), 1200);
   });
 
   card.addEventListener("mouseleave", () => {
+    if (!window.matchMedia("(hover: hover)").matches) return;
     clearTimeout(floatTimer);
     hideTimer = setTimeout(removeFloat, 200);
   });
