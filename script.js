@@ -56,10 +56,38 @@ function setVolume(val) {
   }
 }
 
+// ─── HERO AUTO-CYCLE ──────────────────────────────
+function trendingMovies() {
+  const seen = new Set();
+  return movies.filter(m => {
+    if (m.category !== "trending" || seen.has(m.title)) return false;
+    seen.add(m.title);
+    return true;
+  });
+}
+
+let heroQueue = [];
+let heroIndex = 0;
+
+function buildHeroQueue() {
+  const all = trendingMovies();
+  // shuffle
+  for (let i = all.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [all[i], all[j]] = [all[j], all[i]];
+  }
+  heroQueue = all;
+  heroIndex = 0;
+}
+
+function nextHeroMovie() {
+  heroIndex++;
+  if (heroIndex >= heroQueue.length) buildHeroQueue();
+  loadHero(heroQueue[heroIndex]);
+}
+
 function createYTPlayer(videoId) {
   window._pendingVideoId = null;
-
-  // clear wrapper and add fresh div for YT to replace
   heroTrailerWrap.innerHTML = '<div id="ytPlayerEl"></div>';
 
   ytPlayer = new YT.Player("ytPlayerEl", {
@@ -67,10 +95,15 @@ function createYTPlayer(videoId) {
     playerVars: {
       autoplay: 1, mute: 1, controls: 0,
       rel: 0, modestbranding: 1,
-      loop: 1, playlist: videoId, playsinline: 1
+      playsinline: 1
+      // no loop — we handle next movie on end
     },
     events: {
-      onReady: e => e.target.playVideo()
+      onReady: e => e.target.playVideo(),
+      onStateChange: e => {
+        // YT.PlayerState.ENDED === 0
+        if (e.data === 0) nextHeroMovie();
+      }
     }
   });
 }
@@ -110,7 +143,12 @@ function loadHero(movie) {
 }
 
 const firstTrending = movies.find(m => m.category === "trending");
-if (firstTrending) loadHero(firstTrending);
+if (firstTrending) {
+  buildHeroQueue();
+  // start from a random position in the shuffled queue
+  heroIndex = Math.floor(Math.random() * heroQueue.length);
+  loadHero(heroQueue[heroIndex]);
+}
 
 // ─── FLOATING EXPANDED CARD ───────────────────────
 let floatCard    = null;
